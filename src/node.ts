@@ -100,11 +100,13 @@ export abstract class ExecuteNode extends BaseNode {
     
     getInputs(data?: Record<string, unknown>, connections?: any[]): InputDefinition[] {
         const baseInputs = super.getInputs(data, connections);
+        if (baseInputs.some(i => i.name === 'Event')) return baseInputs;
         return [...baseInputs, { name: 'Event', acceptsType: 'core:event' }];
     }
 
     getOutputs(data?: Record<string, unknown>, connections?: any[]): OutputDefinition[] {
         const baseOutputs = super.getOutputs(data, connections);
+        if (baseOutputs.some(o => o.name === 'Event')) return baseOutputs;
         return [...baseOutputs, { name: 'Event', outputType: 'core:event' }];
     }
 }
@@ -113,8 +115,15 @@ export abstract class EventNode extends BaseNode {
     readonly nodeInterface = 'event';
     abstract readonly category: NodeCategory;
     
+    getInputs(data?: Record<string, unknown>, connections?: any[]): InputDefinition[] {
+        const baseInputs = super.getInputs(data, connections);
+        if (baseInputs.some(i => i.name === 'Event')) return baseInputs;
+        return [...baseInputs, { name: 'Event', acceptsType: 'core:event' }];
+    }
+
     getOutputs(data?: Record<string, unknown>, connections?: any[]): OutputDefinition[] {
         const baseOutputs = super.getOutputs(data, connections);
+        if (baseOutputs.some(o => o.name === 'Event')) return baseOutputs;
         return [...baseOutputs, { name: 'Event', outputType: 'core:event' }];
     }
     
