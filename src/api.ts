@@ -21,6 +21,7 @@ export interface GravityDockAPI {
         watch: (path: string, options?: any) => Promise<string>;
         unwatch: (watchId: string) => Promise<void>;
         onWatchEvent: (callback: (watchId: string, eventName: string, path: string) => void) => () => void;
+        getHomeDir?: () => Promise<string>;
     };
 
     net: {
