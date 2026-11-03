@@ -9,6 +9,7 @@ export interface IOTypeDefinition {
 
 export type CoreIOType =
     | 'core:any'
+    | 'core:cli-input'
     | 'core:data'
     | 'core:expression'
     | 'core:render'
