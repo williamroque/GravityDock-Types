@@ -22,6 +22,13 @@ export interface GravityDockAPI {
         unwatch: (watchId: string) => Promise<void>;
         onWatchEvent: (callback: (watchId: string, eventName: string, path: string) => void) => () => void;
         getHomeDir?: () => Promise<string>;
+        showOpenDialog?: (options?: any) => Promise<{ canceled: boolean; filePaths: string[] }>;
+        showSaveDialog?: (options?: any) => Promise<{ canceled: boolean; filePath?: string }>;
+    };
+
+    dialog?: {
+        showOpenDialog: (options?: any) => Promise<{ canceled: boolean; filePaths: string[] }>;
+        showSaveDialog?: (options?: any) => Promise<{ canceled: boolean; filePath?: string }>;
     };
 
     net: {
@@ -32,6 +39,8 @@ export interface GravityDockAPI {
         getTemplates: () => Promise<Array<{ id: string; name: string; alias?: string; schema_json: string }>>;
         getTemplate: (idOrAlias: string) => Promise<{ id: string; name: string; alias?: string; schema_json: string } | null>;
         getRecords: (templateIdOrAlias: string, projectId?: string | null) => Promise<any[]>;
+        getRecord?: (id: string) => Promise<any | null>;
+        getRecordById?: (id: string) => Promise<any | null>;
         createRecord?: (templateIdOrAlias: string, projectId: string | null, record: any) => Promise<any>;
         watchTemplate: (templateIdOrAlias: string, callback: (event: { action: 'created' | 'updated' | 'deleted' | 'changed'; templateId: string; templateAlias?: string; recordId?: string }) => void) => () => void;
     };

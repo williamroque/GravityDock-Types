@@ -21,6 +21,7 @@ export interface NodeDefinition {
     properties: PropertyDefinition[];
     dynamicInputs?: DynamicInputDefinition;
     dynamicOutputs?: DynamicOutputDefinition;
+    readonly allowVectorizeAny?: boolean;
 
     getInputs?(data?: Record<string, unknown>, connections?: any[]): InputDefinition[];
     getOutputs?(data?: Record<string, unknown>, connections?: any[]): OutputDefinition[];
@@ -39,6 +40,7 @@ export abstract class BaseNode implements NodeDefinition {
     abstract readonly properties: PropertyDefinition[];
     readonly dynamicInputs?: DynamicInputDefinition;
     readonly dynamicOutputs?: DynamicOutputDefinition;
+    readonly allowVectorizeAny?: boolean;
 
     getInputs(data?: Record<string, unknown>, connections?: any[]): InputDefinition[] {
         if (this.dynamicInputs && this.dynamicInputs.baseName) {
